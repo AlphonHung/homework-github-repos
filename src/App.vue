@@ -6,7 +6,7 @@
     <div class="wrapper">
       <h1>Github Repos with Infinite Scroll</h1>
       <h5>Author: 洪士峰 Desmond&emsp;Date: 2020/05/16</h5>
-      <hr>
+      <hr />
       <ul class="repos" ref="repoContainer">
         <li class="repo-item" v-for="(repo, index) in repos" :key="index">
           <div class="repo-title">
@@ -53,7 +53,7 @@ export default {
       const config = {
         baseURL: "https://api.github.com",
         url: "/users/alphonhung/repos",
-        method: "get",
+        method: "get"
         // headers: { Authorization: "token xxx" },
         // params: { page: this.infiniteScrollCount, per_page: 100 }
       };
@@ -118,7 +118,8 @@ export default {
         @include flex-content(column, flex-start, flex-start);
         border: 2px solid $color-border;
         border-radius: 10px;
-        background: url('./assets/images/repo_bg_1.jpg') no-repeat right bottom fixed #fff;
+        background: url("./assets/images/repo_bg_1.jpg") no-repeat right bottom
+          fixed #fff;
         padding: 2rem;
         margin-top: 2rem;
         .repo-title {
@@ -129,7 +130,7 @@ export default {
             width: 2rem;
             height: 2rem;
             border-radius: 50%;
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             border: 2px solid $color-border;
           }
         }
