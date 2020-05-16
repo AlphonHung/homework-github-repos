@@ -1,4 +1,4 @@
-# homework-set
+# homework-github-repos
 
 > A Vue.js project
 

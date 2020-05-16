@@ -5,7 +5,8 @@
     </b-card>
     <div class="wrapper">
       <h1>Github Repos with Infinite Scroll</h1>
-      <h6>Author: 洪士峰 Desmond&emsp;Date: 2020/05/16</h6>
+      <h5>Author: 洪士峰 Desmond&emsp;Date: 2020/05/16</h5>
+      <hr>
       <ul class="repos" ref="repoContainer">
         <li class="repo-item" v-for="(repo, index) in repos" :key="index">
           <div class="display-3">{{ repo.name }}</div>
@@ -13,10 +14,10 @@
           <div class="bottom-row">
             <div class="info-row">
               <b-badge variant="info">{{ repo.language }}</b-badge>
-              <b-badge>Created: {{ repo.created_at }}</b-badge>
-              <b-badge>Updated: {{ repo.updated_at }}</b-badge>
+              <b-badge>Created Date: {{ moment(repo.created_at).format(formatter.time) }}</b-badge>
+              <b-badge>Updated Date: {{ moment(repo.updated_at).format(formatter.time) }}</b-badge>
             </div>
-            <b-button :href="repo.html_url" target="_blank" variant="outline-info">Github Link</b-button>
+            <b-button :href="repo.html_url" target="_blank" variant="info">Github Link</b-button>
           </div>
         </li>
       </ul>
@@ -38,7 +39,10 @@ export default {
     return {
       infiniteScrollCount: 1,
       allowAdd: true, // A flag for avoiding repeat request.
-      repos: []
+      repos: [],
+      formatter: {
+        time: "YYYY/MM/DD"
+      }
     };
   },
   methods: {
@@ -48,7 +52,7 @@ export default {
         url: "/user/repos",
         method: "get",
         headers: {
-          Authorization: "token e6ea03bc0020faf1cb8c884ffc6c26b47c1d0b0b"
+          Authorization: "token b9f079d91e87926f7e95a1932ff778f43c39889d"
         }
         // params: { page: this.infiniteScrollCount, per_page: 100 }
       };
@@ -92,7 +96,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: url("./assets/bg.jpg") repeat-x center top fixed #f9f9f9;
+  background: url("./assets/images/bg.jpg") repeat-x center top fixed #f9f9f9;
   color: #2c3e50;
   $color-border: #7caeba;
   @mixin flex-content($dir: row, $jus: center, $ali: center) {
@@ -113,14 +117,17 @@ export default {
     .repos {
       min-height: calc(100vh - 100px);
       .repo-item {
-        @include flex-content(column, flex-start, center);
+        @include flex-content(column, flex-start, flex-start);
         border: 2px solid $color-border;
         border-radius: 10px;
-        background: rgba(255, 255, 255, 0.8);
+        background-image: url('./assets/images/repo_bg_1.jpg');
+        background-color: #f4f4f4;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-attachment: fixed;
         padding: 2rem;
-        &:nth-child(n + 2) {
-          margin-top: 1rem;
-        }
+        margin-top: 2rem;
+        
         .bottom-row {
           width: 100%;
           @include flex-content(row, space-between, flex-end);
