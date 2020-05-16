@@ -9,7 +9,10 @@
       <hr>
       <ul class="repos" ref="repoContainer">
         <li class="repo-item" v-for="(repo, index) in repos" :key="index">
-          <div class="display-3">{{ repo.name }}</div>
+          <div class="repo-title">
+            <img class="avatar" :src="repo.owner.avatar_url" />
+            {{ repo.name }}
+          </div>
           <p>{{ repo.description }}</p>
           <div class="bottom-row">
             <div class="info-row">
@@ -38,7 +41,7 @@ export default {
   data() {
     return {
       infiniteScrollCount: 1,
-      allowAdd: true, // A flag for avoiding repeat request.
+      allowAdd: false, // A flag for avoiding repeat request.
       repos: [],
       formatter: {
         time: "YYYY/MM/DD"
@@ -49,11 +52,9 @@ export default {
     getRepos() {
       const config = {
         baseURL: "https://api.github.com",
-        url: "/user/repos",
+        url: "/users/alphonhung/repos",
         method: "get",
-        headers: {
-          Authorization: "token b9f079d91e87926f7e95a1932ff778f43c39889d"
-        }
+        // headers: { Authorization: "token xxx" },
         // params: { page: this.infiniteScrollCount, per_page: 100 }
       };
       this.axios.request(config).then(response => {
@@ -80,13 +81,10 @@ export default {
       };
     }
   },
-  computed: {},
-  created() {},
   mounted() {
     this.getRepos();
     this.setEvents();
-  },
-  beforeDestroy() {}
+  }
 };
 </script>
 
@@ -120,14 +118,21 @@ export default {
         @include flex-content(column, flex-start, flex-start);
         border: 2px solid $color-border;
         border-radius: 10px;
-        background-image: url('./assets/images/repo_bg_1.jpg');
-        background-color: #f4f4f4;
-        background-repeat: no-repeat;
-        background-position: right bottom;
-        background-attachment: fixed;
+        background: url('./assets/images/repo_bg_1.jpg') no-repeat right bottom fixed #fff;
         padding: 2rem;
         margin-top: 2rem;
-        
+        .repo-title {
+          @include flex-content(row, flex-start, center);
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          .avatar {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            margin-right: .5rem;
+            border: 2px solid $color-border;
+          }
+        }
         .bottom-row {
           width: 100%;
           @include flex-content(row, space-between, flex-end);
