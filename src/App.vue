@@ -7,8 +7,8 @@
       <h1>Github Repos with Infinite Scroll</h1>
       <h5>Author: 洪士峰 Desmond&emsp;Date: 2020/05/16</h5>
       <hr />
-      <ul class="repos" ref="repoContainer">
-        <li class="repo-item" v-for="(repo, index) in repos" :key="index">
+      <div class="repos" ref="repoContainer">
+        <div class="repo-item" v-for="(repo, index) in repos" :key="index">
           <div class="repo-title">
             <img class="avatar" :src="repo.owner.avatar_url" />
             {{ repo.name }}
@@ -22,8 +22,8 @@
             </div>
             <b-button :href="repo.html_url" target="_blank" variant="info">Github Link</b-button>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <b-modal ref="alert-modal" hide-footer>
       <template v-slot:modal-title>通知訊息</template>
@@ -109,7 +109,7 @@ export default {
     top: 0;
   }
   .wrapper {
-    width: 1250px;
+    max-width: 1250px;
     margin: 0 auto;
     padding: 2rem 0;
     .repos {
